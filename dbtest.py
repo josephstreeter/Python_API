@@ -1,13 +1,25 @@
 import sqlite3
 
-conn = sqlite3.connect("comment_section.db")
-print("DB Connection successful")
-results = conn.execute('''SELECT * FROM Comments''')
+class user:
+    def __init__(self, firstname, lastname):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.displayname = lastname + ", " + firstname
+        self.userid = firstname[0:1] + lastname
 
-for result in results:
-	print ("column0=",result[0])
-	print ("column1=",result[1])
-	print ("column2=",result[2])
-	print ("column1=",result[3])
+    def create(self):
+        conn = sqlite3.connect('idm.db')
+        conn.execute('INSERT INTO users (firstname,lastname,displayname,userid) \
+        VALUES (" + self.firstname + "," + self.lastname + "," + self.displayname + "," + self.userid +");')
 
-conn.close()
+    def get(self, userid):
+        conn = sqlite3.connect('idm.db')
+        results = conn.execute('SELECT * FROM users WHERE userid = "+ userid +";')
+        return results
+    
+
+x = user("Joseph","Streeter")
+#x.create()
+cursor=x.get("JStreeter")
+for i in cursor:
+	print("UserID", i[0])
