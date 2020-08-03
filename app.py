@@ -1,3 +1,4 @@
+import sqlite3
 import flask
 from flask import request, jsonify
 
@@ -10,6 +11,17 @@ class user:
         self.lastname = lastname
         self.displayname = lastname + ", " + firstname
         self.userid = firstname[0:1] + lastname
+
+    def get():
+        conn = sqlite
+        conn = sqlite3.connect('test.db')
+        conn.execute("SELECT * FROM users;"}
+    
+    def create():
+        conn = sqlite3.connect('test.db')
+        conn.execute("INSERT INTO Users (firstname,lastname,displayname,userid) \
+            VALUES ("+self.firstname+","+self.lastname+","+self+","+displayname+","+self.userid+")");
+
 
 
 @app.route('/api/v1/users', methods=['GET'])
